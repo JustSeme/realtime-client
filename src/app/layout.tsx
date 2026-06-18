@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { routes } from "./_lib/routes";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,8 +28,26 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+      >
+      <body className="min-h-full flex flex-col">
+        <header className="sticky top-0 z-50 border-b border-slate-200 backdrop-blur-sm">
+          <nav className="hidden items-center gap-8 md:flex">
+            {routes.map(r => {
+              return (
+                <Link
+                  key={r.href}
+                  href={r.href}
+                  className="group relative py-2 focus-visible:outline-none margin-10 "
+                >
+                {r.label}
+                </Link>
+              )
+            })}
+          </nav>
+        </header>
+        <div className="flex">Global layout</div>
+        {children}
+      </body>
     </html>
   );
 }

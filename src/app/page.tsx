@@ -1,4 +1,4 @@
-import MyButton from "./components/myButtton";
+import MyButton from "./_components/myButtton";
 
 export default function Home() {
   return (
